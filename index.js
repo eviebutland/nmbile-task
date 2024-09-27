@@ -1,53 +1,50 @@
-// are 7 different user roles, and the logic is implemented using a series of if-else statements
-// refactor this code to make it more modular and maintainable? 
-var Roles = {
-    admin: 'admin',
-    editor: 'editor',
-    viewer: 'viewer',
-    guest: 'guest',
-    member: 'member',
-    moderator: 'moderator',
-    support: 'support'
-};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.handleUserRole = handleUserRole;
+var Roles = [
+    'admin', 'editor', 'viewer', 'guest', 'member', 'moderator', 'support'
+];
+var isNationalViewer = true;
+var isPremiumMember = true;
 function handleUserRole(role) {
-    if (!Roles[role]) {
-        return;
+    if (!Roles.includes(role)) {
+        return new Error('not a user role');
     }
-    if (role === 'admin') {
-        // Admin-specific logic
-    }
-    else if (role === 'editor') {
-        // Editor-specific logic
-    }
-    else if (role === 'viewer') {
-        // Viewer-specific logic
-        if ( /* some condition */) {
-            // Nested condition for viewer
-        }
-        else {
-            // Another condition for viewer
-        }
-    }
-    else if (role === 'guest') {
-        // Guest-specific logic
-    }
-    else if (role === 'member') {
-        // Member-specific logic
-        if ( /* some condition */) {
-            // Nested condition for member
-        }
-        else {
-            // Another condition for member
-        }
-    }
-    else if (role === 'moderator') {
-        // Moderator-specific logic
-    }
-    else if (role === 'support') {
-        // Support-specific logic
+    switch (role) {
+        case 'viewer':
+            return isNationalViewer ? handleNationalViewers() : handleInternationalViewers();
+        case 'member':
+            return isPremiumMember ? handlePremiumMembers() : handleStandardMembers();
+        case 'admin':
+            // Admin-specific logic
+            return 'is admin';
+        case 'editor':
+            // Editor-specific logic
+            return 'is editor';
+        case 'guest':
+            // Guest-specific logic
+            return 'is guest';
+        case 'moderator':
+            // Member-specific logic
+            return 'is moderator';
+        case 'support':
+            // Support-specific logic
+            return 'is support';
     }
 }
-handleUserRole('admin');
-// ways to make more modular
-// use switch statement
-// add if's that have nested first
+function handlePremiumMembers() {
+    // condition for premium members
+    return 'is premium member';
+}
+function handleStandardMembers() {
+    // condition for standard members
+    return 'is standard member';
+}
+function handleNationalViewers() {
+    // condition for national viewers
+    return 'is national viewer';
+}
+function handleInternationalViewers() {
+    // condition for international viewers
+    return 'is international viewer';
+}
